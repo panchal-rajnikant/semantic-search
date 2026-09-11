@@ -1,0 +1,8 @@
+# Semantic search generated artifacts
+*.npy
+*.npz
+embeddings/
+indexes/
+vectorstore/
+chroma_db/
+faiss_index/
