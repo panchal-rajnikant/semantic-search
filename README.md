@@ -25,7 +25,8 @@ semantic-search/
 │   ├── chunker.py        # Split documents into overlapping chunks
 │   ├── embeddings.py     # Generate embeddings with Sentence Transformers
 │   ├── loader.py         # Load text documents
-│   └── search.py         # Rank chunks with cosine similarity
+│   ├── search.py         # Search service and query validation
+│   └── vector_index.py   # Store vectors and rank chunks by similarity
 ├── main.py               # Application entry point
 ├── requirements.txt      # Python dependencies
 └── README.md
@@ -45,8 +46,7 @@ Clone the repository and open its directory:
 git clone <repository-url>
 cd semantic-search
 ```
-
-Install the dependencies:
+ Install the dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -62,6 +62,9 @@ python main.py
 
 To search different content, add `.txt` files to `data/` and change the query
 in `main.py`.
+
+The first run may download the `all-MiniLM-L6-v2` model. The model is loaded
+locally after that, depending on your Sentence Transformers cache configuration.
 
 ## Example Output
 

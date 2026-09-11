@@ -1,49 +1,12 @@
 import numpy as np
 
+class searchService:
 
-def cosine_similarity(
-    vector_a,
-    vector_b
-) -> float:
-
-    denominator = (
-        np.linalg.norm(vector_a)
-        *
-        np.linalg.norm(vector_b)
-    )
-
-    if denominator == 0:
-        return 0.0
-
-    return float(
-        np.dot(vector_a, vector_b)
-        / denominator
-    )
-
-
-class SemanticSearch:
-
-    def __init__(
-        self,
-        chunks: list[dict],
-        embeddings,
-        embedding_service
-    ):
-        if len(chunks) != len(embeddings):
-            raise ValueError(
-                "Each chunk must have an embedding"
-            )
-
-        self.chunks = chunks
-        self.embeddings = embeddings
+    def __init__(self, embedding_service, vector_index):
         self.embedding_service = embedding_service
+        self.vector_index = vector_index
 
-
-    def search(
-        self,
-        query: str,
-        top_k: int = 3
-    ) -> list[dict]:
+    def search(self, query: str, top_k:int = 3):
 
         if not query.strip():
             raise ValueError(
@@ -55,34 +18,6 @@ class SemanticSearch:
                 "top_k must be greater than 0"
             )
 
-        query_embedding = (
-            self.embedding_service.embed_query(
-                query
-            )
-        )
+        query_embedding = self.embedding_service.embed_query(query)
 
-        results = []
-
-        for chunk, embedding in zip(
-            self.chunks,
-            self.embeddings
-        ):
-
-            score = cosine_similarity(
-                query_embedding,
-                embedding
-            )
-
-            results.append(
-                {
-                    **chunk,
-                    "score": score
-                }
-            )
-
-        results.sort(
-            key=lambda item: item["score"],
-            reverse=True
-        )
-
-        return results[:top_k]
+        return self.vector_index.search( query_embedding=query_embedding, top_k=top_k)
