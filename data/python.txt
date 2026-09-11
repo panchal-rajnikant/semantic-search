@@ -1,0 +1,10 @@
+Python is a high-level general-purpose programming language.
+
+Python supports multiple programming paradigms including
+object-oriented, procedural, and functional programming.
+
+Python is widely used in web development, machine learning,
+data science, automation, scripting, and backend development.
+
+Python provides built-in data structures including lists,
+dictionaries, sets, and tuples.

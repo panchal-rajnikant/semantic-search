@@ -1,0 +1,13 @@
+Machine learning is a branch of artificial intelligence that
+allows computer systems to learn patterns from data.
+
+Supervised learning uses labeled training data.
+
+Common supervised learning problems include classification
+and regression.
+
+Unsupervised learning works with unlabeled data and includes
+techniques such as clustering.
+
+Models should be evaluated using appropriate metrics and
+validated against unseen data.
