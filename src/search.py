@@ -6,7 +6,7 @@ class searchService:
         self.embedding_service = embedding_service
         self.vector_index = vector_index
 
-    def search(self, query: str, top_k:int = 3):
+    def search(self, query: str, top_k:int = 3, filters: dict | None = None):
 
         if not query.strip():
             raise ValueError(
@@ -20,4 +20,4 @@ class searchService:
 
         query_embedding = self.embedding_service.embed_query(query)
 
-        return self.vector_index.search( query_embedding=query_embedding, top_k=top_k)
+        return self.vector_index.search( query_embedding=query_embedding, top_k=top_k, filters=filters)

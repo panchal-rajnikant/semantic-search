@@ -60,7 +60,9 @@ def main():
         "How can I deploy an ML model "
         "using an API?"
     )
-    results = search_service.search(query=query, top_k=3)
+    results = search_service.search(query=query, top_k=3, filters={
+        "source": "fastapi.txt"
+    })
 
     # ------------------------
     # Display results

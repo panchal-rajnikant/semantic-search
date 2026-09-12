@@ -28,7 +28,7 @@ def chunk_text(text:str, chunk_size:int = 100, overlap:int=20)->list[str]:
         end = start + chunk_size
 
         # chunk_words = words[start:end]
-        chunk_words = words[start:start + chunk_size]
+        chunk_words = words[start:end]
 
         if not chunk_words:
             continue
