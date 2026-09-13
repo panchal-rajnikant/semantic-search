@@ -4,5 +4,6 @@
 embeddings/
 indexes/
 vectorstore/
+storage/
 chroma_db/
 faiss_index/
