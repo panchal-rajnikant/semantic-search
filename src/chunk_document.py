@@ -1,5 +1,5 @@
 from src.chunker import chunk_text
-def chunk_document(documents: list[dict],chunk_size:int = 100, overlap:int = 20)->list[dict]:
+def chunk_document(documents: list[dict],chunk_size, overlap)->list[dict]:
     all_chunks = []
 
     for document in documents:

@@ -3,15 +3,16 @@ from src.chunker import chunk_documents
 
 class IngestionService:
 
-    def __init__(self, EmbeddingService, vector_store):
+    def __init__(self, EmbeddingService, vector_store, config):
         self.embedding_service = EmbeddingService
         self.vector_store = vector_store
+        self.config = config
 
     def ingest(self, data_dir: dir) -> None:
         # load
         documents = load_documents(data_dir)
         # chunk
-        chunks = chunk_documents(documents, chunk_size = 100, overlap = 20) 
+        chunks = chunk_documents(documents, self.config.chunk_size, self.config.overlap) 
         texts = [chunk["text"] for chunk in chunks]
         
         # embedding

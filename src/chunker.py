@@ -44,11 +44,7 @@ def chunk_text(text:str, chunk_size:int = 100, overlap:int=20)->list[str]:
 
     return chunks
 
-def chunk_documents(
-    documents: list[dict],
-    chunk_size: int = 100,
-    overlap: int = 20
-) -> list[dict]:
+def chunk_documents(documents: list[dict], chunk_size, overlap) -> list[dict]:
 
     all_chunks = []
 

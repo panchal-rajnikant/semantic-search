@@ -1,0 +1,10 @@
+"How can I build a Python API?",
+"How do I expose an ML model?",
+"What is supervised learning?",
+"How does clustering work?",
+"What Python structure stores key-value pairs?",
+"How can Docker package my application?",
+"What server runs FastAPI?",
+"Which library handles tabular data?",
+"What is Redis useful for?",
+"How do developers track code changes?"

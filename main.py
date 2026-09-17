@@ -1,15 +1,12 @@
 from src.embedding_service import EmbeddingService
 from src.vector_store import VectorStore
 from src.search_service import SearchService
-
+from src.config import SearchConfig
 
 def main():
-
-    embedding_service = EmbeddingService()
-
-    vector_store = VectorStore(
-        "storage"
-    )
+    config = SearchConfig()
+    embedding_service = EmbeddingService(config.embedding_model)
+    vector_store = VectorStore(config.storage_dir)
 
     vector_store.load()
 
@@ -22,10 +19,7 @@ def main():
         "Enter search query: "
     )
 
-    results = search_service.search(
-        query=query,
-        top_k=3
-    )
+    results = search_service.search(query = query, top_k = config.top_k)
 
     for rank, result in enumerate(
         results,

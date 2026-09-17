@@ -15,6 +15,7 @@ class SearchService:
         self,
         query: str,
         top_k: int = 3,
+        similarity_threshold: float = 0.0,
         filters: dict | None = None
     ) -> list[dict]:
 
@@ -52,6 +53,9 @@ class SearchService:
                 embedding
             )
 
+            if score < similarity_threshold:
+                continue
+            
             results.append({
                 **metadata,
                 "score": score
