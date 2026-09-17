@@ -4,16 +4,15 @@ from src.ingestion_service import IngestionService
 from src.config import SearchConfig
 
 def main():
-
-    embedding_service = EmbeddingService()
     config = SearchConfig()
+    embedding_service = EmbeddingService(config.embedding_model)
 
     vector_store = VectorStore(config.storage_dir)
 
     #initialize ingestion service 
     ingestion_service = IngestionService(
         embedding_service,
-        vector_store,
+        vector_store
     )
 
     # load-chunk-text-embed-save 
