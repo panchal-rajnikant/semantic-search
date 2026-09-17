@@ -1,5 +1,14 @@
 import numpy as np
+from dataclasses import dataclass
 
+
+@dataclass
+class SearchResult:
+    text: str
+    source: str
+    document_id: str
+    chunk_id: int
+    score: float
 
 class SearchService:
 
@@ -14,10 +23,10 @@ class SearchService:
     def search(
         self,
         query: str,
-        top_k: int = 3,
-        similarity_threshold: float = 0.0,
+        top_k: int,
+        similarity_threshold: float,
         filters: dict | None = None
-    ) -> list[dict]:
+    ) -> list[SearchResult]:
 
         if not query.strip():
             raise ValueError(

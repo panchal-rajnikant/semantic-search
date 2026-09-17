@@ -19,7 +19,11 @@ def main():
         "Enter search query: "
     )
 
-    results = search_service.search(query = query, top_k = config.top_k)
+    results = search_service.search(
+        query = query,
+        top_k = config.top_k,
+        similarity_threshold = config.similarity_threshold
+        )
 
     for rank, result in enumerate(
         results,
