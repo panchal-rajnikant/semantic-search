@@ -109,3 +109,15 @@ The exact number of chunks and similarity scores depends on the input files.
 The `storage/` directory contains generated index files and should not be edited
 manually. Rebuild it with `python ingest.py` whenever the source data changes.
 These files are ignored by Git.
+
+
+# Current limitations:
+
+• Exact/brute-force vector search
+• Local file-based persistence
+• Small evaluation corpus
+• Manual relevance evaluation
+• No ANN/HNSW index
+• No reranking
+• No REST API
+• No LLM/RAG generation layer
