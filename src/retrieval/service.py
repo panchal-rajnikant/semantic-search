@@ -41,23 +41,27 @@ class RetrievalService:
 
         retriever = self.retrievers[strategy]
 
-        results = retriever.search(
-            query=query,
-            top_k=candidate_k,
-            filters=filters,
-            # threshold forwarded where applicable
-        )
+        search_args = {
+            "query": query,
+            "top_k": candidate_k,
+            "filters": filters
+        }
 
-        if rerank and self.reranker:
-            return self.reranker.rerank(
-                query,
-                results,
-                top_k
-            )
+        if strategy in (RetrievalStrategy.DENSE, RetrievalStrategy.HYBRID):
+            search_args["similarity_threshold"] = similarity_threshold
+
+        results = retriever.search(**search_args)
+
+        # if rerank and self.reranker:
+        #     return self.reranker.rerank(
+        #         query,
+        #         results,
+        #         top_k
+        #     )
 
         results = results[:top_k]
 
-        for rank, result in enumerate(results, 1):
-            result.rank = rank
+        # for rank, result in enumerate(results, 1):
+        #     result.rank = rank
 
         return results

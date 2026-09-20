@@ -7,7 +7,7 @@ def load_documents(data_dir:str)->list[dict]:
 
     directory = Path(data_dir)
 
-    for file_path in directory.glob("*.txt"):
+    for file_path in directory.rglob("*.txt"):
 
         text = file_path.read_text(
             encoding="utf-8"

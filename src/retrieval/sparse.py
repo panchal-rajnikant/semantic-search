@@ -53,11 +53,11 @@ class SparseRetriever:
 
             results.append({
                 **chunk,
-                "bm25_score": float(score)
+                "score": float(score)
             })
 
         results.sort(
-            key=lambda item: item["bm25_score"],
+            key=lambda item: item["score"],
             reverse=True
         )
 
@@ -97,3 +97,7 @@ class SparseRetriever:
             np.dot(vector_a, vector_b)
             / denominator
         )
+    
+    @staticmethod
+    def _tokenize(text: str) -> list[str]:
+        return text.lower().split()
