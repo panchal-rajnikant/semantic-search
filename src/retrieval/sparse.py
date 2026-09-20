@@ -10,7 +10,7 @@ class SearchResult:
     chunk_id: int
     score: float
 
-class SearchService:
+class SparseRetriever:
 
     def __init__(self, chunks: list[dict] ):
         self.chunks = chunks
