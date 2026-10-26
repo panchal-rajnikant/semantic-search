@@ -1,5 +1,5 @@
 
-def chunk_text(text:str, chunk_size:int = 100, overlap:int=20)->list[str]:
+def chunk_text(text:str, chunk_size:int = 100, overlap:int=20, strategy:str="fixed")->list[str]:
 
     if chunk_size <= 0:
         raise ValueError(
@@ -15,6 +15,12 @@ def chunk_text(text:str, chunk_size:int = 100, overlap:int=20)->list[str]:
         raise ValueError(
             "overlap must be smaller than chunk_size"
         )
+
+    if strategy not in ("fixed", "recursive"):
+        raise ValueError(
+            f"Unsupported chunking strategy: {strategy}"
+        )
+    
     words = text.split()
 
     if not words:
@@ -44,7 +50,7 @@ def chunk_text(text:str, chunk_size:int = 100, overlap:int=20)->list[str]:
 
     return chunks
 
-def chunk_documents(documents: list[dict], chunk_size, overlap) -> list[dict]:
+def chunk_documents(documents: list[dict], chunk_size, overlap, strategy) -> list[dict]:
 
     all_chunks = []
 
@@ -53,7 +59,8 @@ def chunk_documents(documents: list[dict], chunk_size, overlap) -> list[dict]:
         chunks = chunk_text(
             document["text"],
             chunk_size,
-            overlap
+            overlap,
+            strategy
         )
 
         for chunk_id, chunk in enumerate(chunks):

@@ -26,9 +26,20 @@ class SearchConfig:
 
     enable_rerankingTool:bool = True
 
+    chunking_strategy: Literal[
+            "fixed",
+            "recursive"
+        ] = "recursive"
+
 
 @dataclass(frozen=True)
 class RetrievalConfig:
+
+    chunking_strategy: Literal[
+        "fixed",
+        "recursive"
+    ] = "recursive"
+
     strategy: str = "hybrid"
 
     top_k: int = 3

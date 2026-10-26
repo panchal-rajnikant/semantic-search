@@ -13,7 +13,7 @@ class IngestionService:
         # load
         documents = load_documents(data_dir)
         # chunk
-        chunks = chunk_documents(documents, self.config.chunk_size, self.config.chunk_overlap) 
+        chunks = chunk_documents(documents, self.config.chunk_size, self.config.chunk_overlap, self.config.chunking_strategy) 
         texts = [chunk["text"] for chunk in chunks]
         
         # embedding
