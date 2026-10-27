@@ -1,7 +1,8 @@
 # Semantic search generated artifacts
 *.npy
 *.npz
-embeddings/
+*.pyc 
+
 indexes/
 vectorstore/
 storage/
