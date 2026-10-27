@@ -1,3 +1,4 @@
+import hashlib
 
 def chunk_text(text:str, chunk_size:int = 100, overlap:int=20, strategy:str="fixed")->list[str]:
 
@@ -50,27 +51,37 @@ def chunk_text(text:str, chunk_size:int = 100, overlap:int=20, strategy:str="fix
 
     return chunks
 
-def chunk_documents(documents: list[dict], chunk_size, overlap, strategy) -> list[dict]:
+def calculate_content_hash(text: str) -> str:
+    return hashlib.sha256(
+        text.encode("utf-8")
+    ).hexdigest()
+
+def chunk_documents(
+    documents: list[dict],
+    chunk_size: int,
+    overlap: int,
+    strategy: str
+) -> list[dict]:
 
     all_chunks = []
 
     for document in documents:
+        content_hash = calculate_content_hash(document["text"])
 
         chunks = chunk_text(
-            document["text"],
-            chunk_size,
-            overlap,
-            strategy
+            text=document["text"],
+            chunk_size=chunk_size,
+            overlap=overlap,
+            strategy=strategy
         )
 
         for chunk_id, chunk in enumerate(chunks):
-
-            all_chunks.append(
-                {
-                    "source": document["source"],
-                    "chunk_id": chunk_id,
-                    "text": chunk
-                }
-            )
+            all_chunks.append({
+                "document_id": document["document_id"],
+                "source": document["source"],
+                "content_hash": content_hash,
+                "chunk_id": chunk_id,
+                "text": chunk
+            })
 
     return all_chunks

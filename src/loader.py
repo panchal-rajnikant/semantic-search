@@ -17,6 +17,7 @@ def load_documents(data_dir:str)->list[dict]:
             continue
         
         document = {
+            "document_id": file_path.relative_to(directory).as_posix(),
             "source": file_path.name,
             "text": text
         }

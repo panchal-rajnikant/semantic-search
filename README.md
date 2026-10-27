@@ -78,8 +78,8 @@ storage/
 ```
 
 Run `ingest.py` again whenever files in `data/` are added, removed, or edited.
-It rebuilds the saved embeddings and metadata so search results reflect the
-current data.
+It compares document content hashes, skips unchanged documents, and updates the
+saved index for changed, added, or removed documents.
 
 ### Search the Index
 

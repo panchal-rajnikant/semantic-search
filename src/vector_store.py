@@ -28,6 +28,9 @@ class VectorStore:
         with self.metadata_path.open("w",encoding="utf-8") as file:
             json.dump(metadata,file, indent=2)
 
+        self.embeddings = embeddings
+        self.metadata = metadata
+
     def load(self) -> None:
 
         if not self.embeddings_path.exists():
