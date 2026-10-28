@@ -6,6 +6,8 @@ RetrivalStrategy = [
     "sparse",
     "hybrid"
 ]
+
+
 @dataclass(frozen=True)
 class SearchConfig:
     data_dir: str = "data"
@@ -24,17 +26,16 @@ class SearchConfig:
     dense_weight: float = 0.5
     sparse_weight: float = 0.5
 
-    enable_rerankingTool:bool = True
+    enable_rerankingTool: bool = True
 
     chunking_strategy: Literal[
-            "fixed",
-            "recursive"
-        ] = "recursive"
+        "fixed",
+        "recursive"
+    ] = "recursive"
 
 
 @dataclass(frozen=True)
 class RetrievalConfig:
-
     chunking_strategy: Literal[
         "fixed",
         "recursive"
@@ -49,4 +50,5 @@ class RetrievalConfig:
 
     dense_weight: float = 0.5
 
-    reranking_enabled: bool = True
+    reranking_enabled: bool = False
+    reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"

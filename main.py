@@ -4,6 +4,7 @@ from src.retrieval.dense import DenseRetriever
 from src.retrieval.sparse import SparseRetriever
 from src.retrieval.service import RetrievalService
 from src.retrieval.hybrid import HybridRetriever
+from src.retrieval.cross_encoder_reranker import CrossEncoderReranker
 
 from src.config import SearchConfig, RetrievalConfig
 
@@ -19,7 +20,7 @@ def main():
     chunks = vector_store.metadata
 
     # Retrievers
-    dense_retriever  = DenseRetriever(
+    dense_retriever = DenseRetriever(
         embedding_service,
         vector_store
     )
@@ -32,11 +33,16 @@ def main():
         dense_weight=retrieval_config.dense_weight
     )
 
+    reranker = None
+    if retrieval_config.reranking_enabled:
+        reranker = CrossEncoderReranker(retrieval_config.reranker_model, top_k=retrieval_config.top_k)
+
     # Application service
     retrieval_service = RetrievalService(
         dense_retriever=dense_retriever,
         sparse_retriever=sparse_retriever,
-        hybrid_retriever=hybrid_retriever
+        hybrid_retriever=hybrid_retriever,
+        reranker=reranker
     )
 
     query = input(
@@ -47,8 +53,9 @@ def main():
         strategy=retrieval_config.strategy,
         top_k=search_config.top_k,
         candidate_k = retrieval_config.candidate_k,
-        similarity_threshold=search_config.similarity_threshold
-        )
+        similarity_threshold=search_config.similarity_threshold,
+        rerank=retrieval_config.reranking_enabled,
+    )
 
     for rank, result in enumerate(
         results,

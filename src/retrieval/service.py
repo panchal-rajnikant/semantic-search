@@ -25,16 +25,15 @@ class RetrievalService:
         self.reranker = reranker
 
     def search(
-    self,
-    query: str,
-    strategy: RetrievalStrategy,
-    top_k: int,
-    candidate_k: int,
-    similarity_threshold: float,
-    filters: dict | None = None,
-    rerank: bool = False
-) -> list[SearchResult]:
-        
+        self,
+        query: str,
+        strategy: RetrievalStrategy,
+        top_k: int,
+        candidate_k: int,
+        similarity_threshold: float,
+        filters: dict | None = None,
+        rerank: bool = False
+    ) -> list[SearchResult]:
 
         if not query.strip():
             raise ValueError("Query cannot be empty")
@@ -52,16 +51,12 @@ class RetrievalService:
 
         results = retriever.search(**search_args)
 
-        # if rerank and self.reranker:
-        #     return self.reranker.rerank(
-        #         query,
-        #         results,
-        #         top_k
-        #     )
+        if rerank and self.reranker is not None:
+            results = self.reranker.rerank(
+                query=query,
+                candidates=results,
+                top_k=top_k,
+            )
+            return results
 
-        results = results[:top_k]
-
-        # for rank, result in enumerate(results, 1):
-        #     result.rank = rank
-
-        return results
+        return results[:top_k]
