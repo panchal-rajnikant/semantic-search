@@ -1,0 +1,40 @@
+[
+    {
+        "id": "q001",
+        "query": "How can I build a Python API?",
+        "query_type": "semantic",
+        "relevant_sources": [
+            "fastapi.txt"
+        ]
+    },
+    {
+        "id": "q002",
+        "query": "Pydantic request validation",
+        "query_type": "keyword",
+        "relevant_sources": [
+            "fastapi.txt"
+        ]
+    },
+    {
+        "id": "q003",
+        "query": "What learning method uses labeled examples?",
+        "query_type": "semantic",
+        "relevant_sources": [
+            "machine_learning.txt"
+        ]
+    },
+    {
+        "id": "q004",
+        "query": "Python dictionaries key value",
+        "query_type": "keyword",
+        "relevant_sources": [
+            "python.txt"
+        ]
+    },
+    {
+        "id": "q005",
+        "query": "What is Redis useful for?",
+        "query_type": "unanswerable",
+        "relevant_sources": []
+    }
+]
