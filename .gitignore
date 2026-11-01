@@ -2,7 +2,10 @@
 *.npy
 *.npz
 *.pyc 
+main1.py
+experiments.txt
 
+__pycache__/
 indexes/
 vectorstore/
 storage/
